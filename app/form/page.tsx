@@ -9,7 +9,6 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Checkbox } from "@/components/ui/checkbox"
 import { Card, CardContent } from "@/components/ui/card"
 import { ImagePlus } from "lucide-react"
 
@@ -139,7 +138,7 @@ export default function ClassifiedForm() {
                           <div className="flex">
                             <Input {...field} className="rounded-r-none" />
                             <div className="flex items-center px-3 border border-l-0 border-input bg-muted rounded-r-md">
-                              ,00 EUR
+                              €
                             </div>
                           </div>
                         </FormControl>
@@ -198,7 +197,7 @@ export default function ClassifiedForm() {
                     </div>
                   </div>
                   <FormDescription>
-                    Tipp: Lade bis zu 20 Bilder mit einer maximalen Größe von 12 MB hoch.
+                    Tipp: Lade bis zu 20 Bilder mit einer maximalen Größe von 5 MB hoch.
                   </FormDescription>
                 </div>
 
@@ -245,24 +244,6 @@ export default function ClassifiedForm() {
                       </FormItem>
                     )}
                   />
-                  <FormField
-                    control={form.control}
-                    name="showFullAddress"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                        <FormControl>
-                          <Checkbox checked={field.value} onCheckedChange={field.onChange} />
-                        </FormControl>
-                        <div className="space-y-1 leading-none">
-                          <FormLabel>Vollständige Adresse anzeigen</FormLabel>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
-                  <FormDescription>
-                    Tipp: Standardmäßig zeigen wir nur die Postleitzahl und den Ort an. Wenn du die vollständige Adresse
-                    anzeigen lassen möchtest, setze bitte einen Haken im Kästchen.
-                  </FormDescription>
                 </div>
 
                 <div>
@@ -284,24 +265,6 @@ export default function ClassifiedForm() {
                     )}
                   />
                 </div>
-
-                <FormField
-                  control={form.control}
-                  name="terms"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                      <FormControl>
-                        <Checkbox checked={field.value} onCheckedChange={field.onChange} />
-                      </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel>
-                          Ja, zu regelmäßigen Mails von uns mit Produktinfos, Tipps, Aktionen und spannenden Geschichten
-                          über uns und mobile.de - Abmelden geht jederzeit
-                        </FormLabel>
-                      </div>
-                    </FormItem>
-                  )}
-                />
               </div>
             </CardContent>
           </Card>
