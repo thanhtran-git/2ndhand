@@ -10,29 +10,25 @@ import { Textarea } from "@/components/ui/textarea"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent } from "@/components/ui/card"
-import { ImagePlus } from "lucide-react"
+// import { ImagePlus } from "lucide-react"
 
 const formSchema = z.object({
   type: z.enum(["offer", "search"], {
     required_error: "Bitte wählen Sie, ob Sie anbieten oder suchen",
   }),
-  title: z.string().min(2, {
-    message: "Der Titel muss mindestens 2 Zeichen lang sein.",
+  title: z.string().min(6, {
+    message: "Der Titel muss mindestens 6 Zeichen lang sein.",
   }),
   category: z.string({
     required_error: "Bitte wählen Sie eine Kategorie.",
   }),
-  price: z.string(),
+  price: z.number(),
   priceType: z.string(),
   description: z.string(),
-  postalCode: z.string().min(5).max(5),
+  postalCode: z.number().min(5).max(5),
   city: z.string(),
   street: z.string().optional(),
-  showFullAddress: z.boolean().default(false),
   name: z.string().min(2),
-  terms: z.boolean().refine((val) => val === true, {
-    message: "Sie müssen die Nutzungsbedingungen akzeptieren",
-  }),
 })
 
 export default function ClassifiedForm() {
@@ -40,8 +36,6 @@ export default function ClassifiedForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       type: "offer",
-      showFullAddress: false,
-      terms: false,
     },
   })
 
@@ -186,8 +180,8 @@ export default function ClassifiedForm() {
                   )}
                 />
 
-                <div className="space-y-2">
-                  <FormLabel>Bilder (empfohlen)</FormLabel>
+                {/* <div className="space-y-2">
+                  <FormLabel>Bilder</FormLabel>
                   <div className="border-2 border-dashed rounded-lg p-6 text-center">
                     <ImagePlus className="mx-auto h-12 w-12 text-gray-400" />
                     <div className="mt-4">
@@ -199,7 +193,7 @@ export default function ClassifiedForm() {
                   <FormDescription>
                     Tipp: Lade bis zu 20 Bilder mit einer maximalen Größe von 5 MB hoch.
                   </FormDescription>
-                </div>
+                </div> */}
 
                 <div className="space-y-4">
                   <h3 className="text-lg font-medium">Ort</h3>
