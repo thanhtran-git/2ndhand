@@ -1,15 +1,29 @@
-"use client"
+"use client";
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
-import { Button } from "@/components/ui/button"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Card, CardContent } from "@/components/ui/card"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Card, CardContent } from "@/components/ui/card";
 // import { ImagePlus } from "lucide-react"
 
 const formSchema = z.object({
@@ -29,7 +43,7 @@ const formSchema = z.object({
   city: z.string(),
   street: z.string().optional(),
   name: z.string().min(2),
-})
+});
 
 export default function ClassifiedForm() {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -37,10 +51,10 @@ export default function ClassifiedForm() {
     defaultValues: {
       type: "offer",
     },
-  })
+  });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+    console.log(values);
   }
 
   return (
@@ -67,13 +81,17 @@ export default function ClassifiedForm() {
                             <FormControl>
                               <RadioGroupItem value="offer" />
                             </FormControl>
-                            <FormLabel className="font-normal">Ich biete</FormLabel>
+                            <FormLabel className="font-normal">
+                              Ich biete
+                            </FormLabel>
                           </FormItem>
                           <FormItem className="flex items-center space-x-3 space-y-0">
                             <FormControl>
                               <RadioGroupItem value="search" />
                             </FormControl>
-                            <FormLabel className="font-normal">Ich suche</FormLabel>
+                            <FormLabel className="font-normal">
+                              Ich suche
+                            </FormLabel>
                           </FormItem>
                         </RadioGroup>
                       </FormControl>
@@ -91,7 +109,10 @@ export default function ClassifiedForm() {
                       <FormControl>
                         <Input placeholder="Titel eingeben" {...field} />
                       </FormControl>
-                      <FormDescription>Tipp: Mit einem aussagekräftigen Titel verkaufst du besser</FormDescription>
+                      <FormDescription>
+                        Tipp: Mit einem aussagekräftigen Titel verkaufst du
+                        besser
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -110,7 +131,9 @@ export default function ClassifiedForm() {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="electronics">Elektronik</SelectItem>
+                          <SelectItem value="electronics">
+                            Elektronik
+                          </SelectItem>
                           <SelectItem value="furniture">Möbel</SelectItem>
                           <SelectItem value="clothing">Kleidung</SelectItem>
                           <SelectItem value="other">Sonstiges</SelectItem>
@@ -155,7 +178,9 @@ export default function ClassifiedForm() {
                           </FormControl>
                           <SelectContent>
                             <SelectItem value="fixed">Festpreis</SelectItem>
-                            <SelectItem value="negotiable">Verhandelbar</SelectItem>
+                            <SelectItem value="negotiable">
+                              Verhandelbar
+                            </SelectItem>
                             <SelectItem value="free">Zu verschenken</SelectItem>
                           </SelectContent>
                         </Select>
@@ -172,9 +197,15 @@ export default function ClassifiedForm() {
                     <FormItem>
                       <FormLabel>Beschreibung</FormLabel>
                       <FormControl>
-                        <Textarea placeholder="Beschreibe deinen Artikel" className="resize-none" {...field} />
+                        <Textarea
+                          placeholder="Beschreibe deinen Artikel"
+                          className="resize-none"
+                          {...field}
+                        />
                       </FormControl>
-                      <FormDescription>Du hast noch 4000 Zeichen übrig</FormDescription>
+                      <FormDescription>
+                        Du hast noch 4000 Zeichen übrig
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -232,7 +263,10 @@ export default function ClassifiedForm() {
                       <FormItem>
                         <FormLabel>Straße/Nr. (optional)</FormLabel>
                         <FormControl>
-                          <Input placeholder="Straße und Hausnummer" {...field} />
+                          <Input
+                            placeholder="Straße und Hausnummer"
+                            {...field}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -252,7 +286,8 @@ export default function ClassifiedForm() {
                           <Input placeholder="Dein Name" {...field} />
                         </FormControl>
                         <FormDescription>
-                          Tipp: Du kannst deinen Profilnamen jederzeit in den Einstellungen ändern
+                          Tipp: Du kannst deinen Profilnamen jederzeit in den
+                          Einstellungen ändern
                         </FormDescription>
                         <FormMessage />
                       </FormItem>
@@ -267,14 +302,15 @@ export default function ClassifiedForm() {
             <Button variant="outline" type="button">
               Vorschau
             </Button>
-            <Button type="submit" className="bg-green-500 hover:bg-green-600 text-white">
+            <Button
+              type="submit"
+              className="bg-green-500 hover:bg-green-600 text-white"
+            >
               Anzeige aufgeben
             </Button>
-
           </div>
         </form>
       </Form>
     </div>
-  )
+  );
 }
-
