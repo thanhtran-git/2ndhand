@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { UserRound } from "lucide-react";
 
 export default function Navbar() {
   return (
@@ -9,10 +10,12 @@ export default function Navbar() {
             <Link href="/" className="flex items-center space-x-2">
               <span className="text-2xl font-bold text-white">2ndhand.de</span>
             </Link>
+
             <Link
-              href="mein-konto"
-              className="text-xl font-bold text-white hover:underline"
+              href="/mein-konto"
+              className="flex flex-col items-center text-l font-bold text-white hover:underline"
             >
+              <UserRound className="h-6 w-6 text-white" />
               Mein Konto
             </Link>
           </div>
