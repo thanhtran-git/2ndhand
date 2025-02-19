@@ -1,9 +1,9 @@
 "use client";
 
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { Search, MapPin } from "lucide-react";
-import { Button } from "@/components/ui/button";
+
 import {
   Select,
   SelectContent,
@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
+import { SignInButton } from "@/components/auth/signin-button";
+import { SignOutButton } from "@/components/auth/signout-button";
 
 export function SiteHeader() {
   const { data: session } = useSession();
@@ -38,25 +40,14 @@ export function SiteHeader() {
                     className="rounded-full border border-white mr-3"
                   />
                 )}
-
-                <Link
-                  href="#"
-                  onClick={() => signOut({ callbackUrl: "/", redirect: true })}
-                  className="text-green-800 font-bold hover:underline"
-                >
-                  Abmelden
-                </Link>
+                <SignOutButton />
               </>
             ) : (
-              <Button
-                onClick={() => signIn("github")}
-                className="bg-[#C5E86C] text-black hover:bg-[#b3d462]"
-              >
-                Anmelden
-              </Button>
+              <SignInButton />
             )}
           </div>
         </div>
+
         <div className="flex gap-2">
           <div className="flex flex-1 items-center gap-2 rounded-md bg-white p-2">
             <Search className="h-4 w-4 text-gray-500" />

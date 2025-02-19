@@ -1,15 +1,13 @@
-"use client";
-
-import { useSession } from "next-auth/react";
 import { SiteHeader } from "@/components/site-header";
 import { SidebarNav } from "@/components/sidebar-nav";
 import { ProductCard } from "@/components/product-card";
 import { Button } from "@/components/ui/button";
 import { sidebarNavItems, featuredProducts } from "@/utils/dummy";
 import Link from "next/link";
+import { auth } from "@/auth";
 
-export default function Home() {
-  const { data: session } = useSession();
+export default async function Home() {
+  const session = await auth();
 
   return (
     <div className="min-h-screen bg-gray-50 mx-auto">
