@@ -77,15 +77,12 @@ export default async function Home() {
             </div>
           </section>
           <section>
-            <h2 className="text-2xl font-bold">Lädt Anzeigen...</h2>
-            {products.length > 0 ? (
+            {products && (
               <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {products.map((product) => (
                   <ProductCard key={product.id} {...product} />
                 ))}
               </div>
-            ) : (
-              <p>Keine Anzeigen gefunden.</p>
             )}
           </section>
         </main>
