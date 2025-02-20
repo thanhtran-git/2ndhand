@@ -16,7 +16,7 @@ model ClassifiedAd {
   price       Float
   priceType   String
   description String
-  postalCode  Int
+  postalCode  String
   city        String
   street      String?
   name        String
