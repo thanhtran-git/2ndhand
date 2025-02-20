@@ -1,6 +1,3 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SidebarNav } from "@/components/sidebar-nav";
 import { ProductCard } from "@/components/product-card";
@@ -10,6 +7,8 @@ import {
   featuredProducts,
   exampleProducts,
 } from "@/utils/dummy";
+import { auth } from "@/auth";
+import Link from "next/link";
 
 interface Product {
   id: string;
@@ -19,24 +18,30 @@ interface Product {
   negotiable?: boolean;
 }
 
-export default function Home() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const res = await fetch("/api/classifiedads");
-        const data = await res.json();
-        setProducts(data.ads);
-      } catch (error) {
-        console.error("Error fetching ads:", error);
-      } finally {
-        setLoading(false);
+async function fetchProducts(): Promise<Product[]> {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/classifiedads`,
+      {
+        cache: "no-store",
       }
+    );
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch ads");
     }
-    fetchProducts();
-  }, []);
+
+    const data = await res.json();
+    return data.ads || [];
+  } catch (error) {
+    console.error("Error fetching ads:", error);
+    return [];
+  }
+}
+
+export default async function Home() {
+  const session = await auth();
+  const products = await fetchProducts();
 
   return (
     <div className="min-h-screen bg-gray-50 mx-auto">
@@ -49,7 +54,11 @@ export default function Home() {
           <section>
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold">Galerie</h2>
-              <Button variant="outline">Anzeige hier platzieren</Button>
+              {session && (
+                <Link href="/form">
+                  <Button variant="outline">Jetzt inserieren</Button>
+                </Link>
+              )}
             </div>
             <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {featuredProducts.map((product) => (
@@ -67,17 +76,18 @@ export default function Home() {
               ))}
             </div>
           </section>
-
-          {loading ? (
-            <p>Lädt Anzeigen...</p>
-          ) : (
-            <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {products.length &&
-                products.map((product) => (
+          <section>
+            <h2 className="text-2xl font-bold">Lädt Anzeigen...</h2>
+            {products.length > 0 ? (
+              <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                {products.map((product) => (
                   <ProductCard key={product.id} {...product} />
                 ))}
-            </div>
-          )}
+              </div>
+            ) : (
+              <p>Keine Anzeigen gefunden.</p>
+            )}
+          </section>
         </main>
       </div>
     </div>

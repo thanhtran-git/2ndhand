@@ -36,7 +36,7 @@ export async function GET() {
         price: true,
         city: true,
       },
-      orderBy: { createdAt: "desc" }, // Optional: Order by latest ads
+      orderBy: { createdAt: "desc" },
     });
 
     return NextResponse.json({ ads });
