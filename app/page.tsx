@@ -45,6 +45,7 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50 mx-auto">
+    <div className="min-h-screen bg-gray-50 mx-auto">
       <SiteHeader />
       <div className="container mx-auto grid grid-cols-1 gap-6 py-8 md:grid-cols-[240px_1fr]">
         <aside className="hidden md:block">
