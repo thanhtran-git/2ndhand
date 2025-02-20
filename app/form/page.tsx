@@ -24,6 +24,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 // import { ImagePlus } from "lucide-react"
 
 const formSchema = z.object({
@@ -36,10 +38,15 @@ const formSchema = z.object({
   category: z.string({
     required_error: "Bitte wählen Sie eine Kategorie.",
   }),
-  price: z.number(),
+  price: z.coerce.number(),
   priceType: z.string(),
   description: z.string(),
-  postalCode: z.number().min(5).max(5),
+  postalCode: z
+    .string()
+    .regex(/^\d*$/, "PLZ darf nur Zahlen enthalten")
+    .min(5, "PLZ muss mindestens 5 Zeichen lang sein")
+    .max(5, "PLZ darf nicht mehr als 5 Zeichen lang sein")
+    .default(""),
   city: z.string(),
   street: z.string().optional(),
   name: z.string().min(2),
@@ -50,11 +57,44 @@ export default function ClassifiedForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       type: "offer",
+      title: "",
+      category: "",
+      price: 1,
+      priceType: "",
+      description: "",
+      postalCode: "",
+      city: "",
+      street: "",
+      name: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setLoading(true);
+
+    try {
+      console.log("Sending Data:", values);
+      const response = await fetch("/api/classifiedads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+
+      if (response.ok) {
+        alert("Anzeige erfolgreich aufgegeben!");
+        router.push("/");
+      } else {
+        const errorData = await response.json();
+        alert("Fehler beim Speichern: " + errorData.error);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -304,9 +344,10 @@ export default function ClassifiedForm() {
             </Button>
             <Button
               type="submit"
+              disabled={loading}
               className="bg-green-500 hover:bg-green-600 text-white"
             >
-              Anzeige aufgeben
+              {loading ? "Speichern..." : "Anzeige aufgeben"}
             </Button>
           </div>
         </form>

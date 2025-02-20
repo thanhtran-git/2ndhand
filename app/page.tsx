@@ -1,10 +1,43 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SidebarNav } from "@/components/sidebar-nav";
 import { ProductCard } from "@/components/product-card";
 import { Button } from "@/components/ui/button";
-import { sidebarNavItems, featuredProducts } from "@/utils/dummy";
+import {
+  sidebarNavItems,
+  featuredProducts,
+  exampleProducts,
+} from "@/utils/dummy";
+
+interface Product {
+  id: string;
+  title: string;
+  price: number;
+  city: string;
+  negotiable?: boolean;
+}
 
 export default function Home() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const res = await fetch("/api/classifiedads");
+        const data = await res.json();
+        setProducts(data.ads);
+      } catch (error) {
+        console.error("Error fetching ads:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchProducts();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50 mx-auto">
       <SiteHeader />
@@ -29,11 +62,22 @@ export default function Home() {
               <h2 className="text-2xl font-bold">Neueste Anzeigen</h2>
             </div>
             <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {featuredProducts.map((product) => (
+              {exampleProducts.map((product) => (
                 <ProductCard key={product.title} {...product} />
               ))}
             </div>
           </section>
+
+          {loading ? (
+            <p>Lädt Anzeigen...</p>
+          ) : (
+            <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {products.length &&
+                products.map((product) => (
+                  <ProductCard key={product.id} {...product} />
+                ))}
+            </div>
+          )}
         </main>
       </div>
     </div>
