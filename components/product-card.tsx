@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+
 import { Heart } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 
 interface ProductCardProps {
+  id: string;
   title: string;
   price: number;
   city: string;
@@ -45,9 +46,8 @@ export function ProductCard({
         </div>
       </CardHeader>
       <CardContent className="p-3">
-        <Link href="#" className="font-medium hover:underline">
-          {title}
-        </Link>
+        {title}
+
         <div className="mt-1 text-lg font-bold">
           {price.toLocaleString("de-DE", {
             style: "currency",

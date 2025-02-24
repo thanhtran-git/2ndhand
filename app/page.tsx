@@ -9,6 +9,7 @@ import {
 } from "@/utils/dummy";
 import { auth } from "@/auth";
 import Link from "next/link";
+import slugify from "slugify";
 
 interface Product {
   id: string;
@@ -16,6 +17,7 @@ interface Product {
   price: number;
   city: string;
   negotiable?: boolean;
+  imageUrl: string;
 }
 
 async function fetchProducts(): Promise<Product[]> {
@@ -62,7 +64,11 @@ export default async function Home() {
             </div>
             <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {featuredProducts.map((product) => (
-                <ProductCard key={product.title} {...product} />
+                <Link key={product.id} href={`/product/mock/${product.id}`}>
+                  <div>
+                    <ProductCard {...product} />
+                  </div>
+                </Link>
               ))}
             </div>
           </section>
@@ -72,7 +78,11 @@ export default async function Home() {
             </div>
             <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {exampleProducts.map((product) => (
-                <ProductCard key={product.title} {...product} />
+                <Link key={product.id} href={`/product/mock/${product.id}`}>
+                  <div>
+                    <ProductCard {...product} />
+                  </div>
+                </Link>
               ))}
             </div>
           </section>
@@ -80,7 +90,17 @@ export default async function Home() {
             {products && (
               <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {products.map((product) => (
-                  <ProductCard key={product.id} {...product} />
+                  <Link
+                    key={product.id}
+                    href={`/product/${slugify(product.title, {
+                      lower: true,
+                      strict: true,
+                    })}/${product.id}`}
+                  >
+                    <div>
+                      <ProductCard {...product} />
+                    </div>
+                  </Link>
                 ))}
               </div>
             )}
