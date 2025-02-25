@@ -1,4 +1,3 @@
-import { SiteHeader } from "@/components/site-header";
 import { SidebarNav } from "@/components/sidebar-nav";
 import { ProductCard } from "@/components/product-card";
 import { Button } from "@/components/ui/button";
@@ -47,7 +46,6 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50 mx-auto">
-      <SiteHeader />
       <div className="container mx-auto grid grid-cols-1 gap-6 py-8 md:grid-cols-[240px_1fr]">
         <aside className="hidden md:block">
           <SidebarNav items={sidebarNavItems} className="sticky top-24" />
