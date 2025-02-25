@@ -1,17 +1,20 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useSession } from "next-auth/react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -24,9 +27,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-// import { ImagePlus } from "lucide-react"
 
 const formSchema = z.object({
   type: z.enum(["offer", "search"], {
@@ -49,10 +49,10 @@ const formSchema = z.object({
     .default(""),
   city: z.string(),
   street: z.string().optional(),
-  name: z.string().min(2),
 });
 
 export default function ClassifiedForm() {
+  const { data: session } = useSession();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -65,7 +65,6 @@ export default function ClassifiedForm() {
       postalCode: "",
       city: "",
       street: "",
-      name: "",
     },
   });
 
@@ -73,14 +72,25 @@ export default function ClassifiedForm() {
   const [loading, setLoading] = useState(false);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!session || !session.user) {
+      alert("Du musst eingeloggt sein, um eine Anzeige zu erstellen.");
+      return;
+    }
+
     setLoading(true);
 
+    const classifiedAdData = {
+      ...values,
+      userId: session.user.id, // Attach userId from session
+      name: session.user.name, // Attach user's name from session
+    };
+
     try {
-      console.log("Sending Data:", values);
+      console.log("Sending Data:", classifiedAdData);
       const response = await fetch("/api/classifiedads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        body: JSON.stringify(classifiedAdData),
       });
 
       if (response.ok) {
@@ -308,27 +318,6 @@ export default function ClassifiedForm() {
                             {...field}
                           />
                         </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                <div>
-                  <h3 className="text-lg font-medium mb-2">Deine Angaben</h3>
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Name</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Dein Name" {...field} />
-                        </FormControl>
-                        <FormDescription>
-                          Tipp: Du kannst deinen Profilnamen jederzeit in den
-                          Einstellungen ändern
-                        </FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
