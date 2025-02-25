@@ -52,7 +52,10 @@ const formSchema = z.object({
 });
 
 export default function ClassifiedForm() {
+  const [loading, setLoading] = useState(false);
   const { data: session } = useSession();
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -68,9 +71,6 @@ export default function ClassifiedForm() {
     },
   });
 
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
-
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (!session || !session.user) {
       alert("Du musst eingeloggt sein, um eine Anzeige zu erstellen.");
@@ -81,8 +81,8 @@ export default function ClassifiedForm() {
 
     const classifiedAdData = {
       ...values,
-      userId: session.user.id, // Attach userId from session
-      name: session.user.name, // Attach user's name from session
+      userId: session.user.id,
+      name: session.user.name,
     };
 
     try {
