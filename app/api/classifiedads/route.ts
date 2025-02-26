@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
+import { auth } from "@/auth";
 
 export async function POST(req: Request) {
   try {
@@ -29,17 +28,36 @@ export async function POST(req: Request) {
 
 export async function GET() {
   try {
+    const session = await auth();
+
     const ads = await prisma.classifiedAd.findMany({
       select: {
         id: true,
         title: true,
         price: true,
         city: true,
+        favorites: {
+          where: {
+            userId: session?.user?.id,
+          },
+          select: {
+            id: true,
+          },
+        },
       },
       orderBy: { createdAt: "desc" },
     });
 
-    return NextResponse.json({ ads });
+    const mappedAds = ads.map((ad) => ({
+      ...ad,
+      isFavorited: ad.favorites.some(
+        (favorite) =>
+          (favorite as { id: string; userId: string }).userId ===
+          session?.user?.id
+      ),
+    }));
+
+    return NextResponse.json({ ads: mappedAds });
   } catch (error) {
     console.error("Database fetch error:", error);
     return NextResponse.json({ error: "Failed to load ads" }, { status: 500 });

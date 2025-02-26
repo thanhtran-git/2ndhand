@@ -1,13 +1,12 @@
 import { SidebarNav } from "@/components/sidebar-nav";
 import { ProductCard } from "@/components/product-card";
 import { Button } from "@/components/ui/button";
+import { auth } from "@/auth";
 import {
   sidebarNavItems,
   featuredProducts,
   exampleProducts,
 } from "@/utils/dummy";
-import { auth } from "@/auth";
-import Link from "next/link";
 import slugify from "slugify";
 
 interface Product {
@@ -17,6 +16,7 @@ interface Product {
   city: string;
   negotiable?: boolean;
   imageUrl: string;
+  isFavorited: boolean;
 }
 
 async function fetchProducts(): Promise<Product[]> {
@@ -54,19 +54,16 @@ export default async function Home() {
           <section>
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold">Galerie</h2>
-              {session && (
-                <Link href="/form">
-                  <Button variant="outline">Jetzt inserieren</Button>
-                </Link>
-              )}
+              {session && <Button variant="outline">Jetzt inserieren</Button>}
             </div>
             <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {featuredProducts.map((product) => (
-                <Link key={product.id} href={`/product/mock/${product.id}`}>
-                  <div>
-                    <ProductCard {...product} />
-                  </div>
-                </Link>
+                <div key={product.id}>
+                  <ProductCard
+                    {...product}
+                    link={`/product/mock/${product.id}`}
+                  />
+                </div>
               ))}
             </div>
           </section>
@@ -76,11 +73,12 @@ export default async function Home() {
             </div>
             <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {exampleProducts.map((product) => (
-                <Link key={product.id} href={`/product/mock/${product.id}`}>
-                  <div>
-                    <ProductCard {...product} />
-                  </div>
-                </Link>
+                <div key={product.id}>
+                  <ProductCard
+                    {...product}
+                    link={`/product/mock/${product.id}`}
+                  />
+                </div>
               ))}
             </div>
           </section>
@@ -88,17 +86,15 @@ export default async function Home() {
             {products && (
               <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {products.map((product) => (
-                  <Link
-                    key={product.id}
-                    href={`/product/${slugify(product.title, {
-                      lower: true,
-                      strict: true,
-                    })}/${product.id}`}
-                  >
-                    <div>
-                      <ProductCard {...product} />
-                    </div>
-                  </Link>
+                  <div key={product.id}>
+                    <ProductCard
+                      {...product}
+                      link={`/product/${slugify(product.title, {
+                        lower: true,
+                        strict: true,
+                      })}/${product.id}`}
+                    />
+                  </div>
                 ))}
               </div>
             )}
