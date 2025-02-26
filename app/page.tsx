@@ -1,7 +1,5 @@
 import { SidebarNav } from "@/components/sidebar-nav";
 import ProductCard from "@/components/product-card";
-import { Button } from "@/components/ui/button";
-import { auth } from "@/auth";
 import {
   sidebarNavItems,
   featuredProducts,
@@ -32,7 +30,6 @@ async function fetchProducts(): Promise<ClassifiedAd[]> {
 }
 
 export default async function Home() {
-  const session = await auth();
   const products = await fetchProducts();
 
   return (
@@ -45,7 +42,6 @@ export default async function Home() {
           <section>
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold">Galerie</h2>
-              {session && <Button variant="outline">Jetzt inserieren</Button>}
             </div>
             <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {featuredProducts.map((product) => (

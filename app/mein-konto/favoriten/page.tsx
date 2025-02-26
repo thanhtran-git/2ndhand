@@ -4,7 +4,7 @@ import PreviewCardList from "@/components/preview-card-list";
 import { ClassifiedAd } from "@/lib/types";
 import Link from "next/link";
 
-async function fetchUserAds(): Promise<ClassifiedAd[]> {
+async function fetchUserFavorites(): Promise<ClassifiedAd[]> {
   try {
     const session = await auth();
 
@@ -12,9 +12,13 @@ async function fetchUserAds(): Promise<ClassifiedAd[]> {
       return [];
     }
 
-    const ads = await prisma.classifiedAd.findMany({
+    const favorites = await prisma.classifiedAd.findMany({
       where: {
-        userId: session.user.id,
+        favorites: {
+          some: {
+            userId: session.user.id,
+          },
+        },
       },
       select: {
         id: true,
@@ -27,15 +31,15 @@ async function fetchUserAds(): Promise<ClassifiedAd[]> {
       orderBy: { createdAt: "desc" },
     });
 
-    return ads as ClassifiedAd[];
+    return favorites as ClassifiedAd[];
   } catch (error) {
-    console.error("Error fetching user ads:", error);
+    console.error("Error fetching user favorites:", error);
     return [];
   }
 }
 
-export default async function MyAds() {
-  const userAds = await fetchUserAds();
+export default async function MyFavorites() {
+  const userFavorites = await fetchUserFavorites();
 
   return (
     <main className="min-h-screen bg-gray-100 py-8">
@@ -44,18 +48,15 @@ export default async function MyAds() {
           className="flex mb-6 justify-center
          gap-10"
         >
-          <h1 className="text-2xl font-bold text-[#86B817] underline underline-offset-4">
+          <Link href="/mein-konto" className="text-2xl hover:underline">
             Meine Inserate
-          </h1>
-          <p className="text-2xl">|</p>
-          <Link
-            href="/mein-konto/favoriten"
-            className="text-2xl hover:underline"
-          >
-            Favoriten
           </Link>
+          <p className="text-2xl">|</p>
+          <h1 className="text-2xl font-bold text-[#86B817] underline underline-offset-4">
+            Favoriten
+          </h1>
         </div>
-        <PreviewCardList ads={userAds} />
+        <PreviewCardList ads={userFavorites} />
       </div>
     </main>
   );

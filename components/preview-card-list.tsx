@@ -8,9 +8,7 @@ interface PreviewCardListProps {
 
 export default function PreviewCardList({ ads }: PreviewCardListProps) {
   if (ads.length === 0) {
-    return (
-      <p className="text-gray-500">Du hast noch keine Anzeigen erstellt.</p>
-    );
+    return <p className="text-gray-500">Keine Inserate vorhanden</p>;
   }
 
   return (
