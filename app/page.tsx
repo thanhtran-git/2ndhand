@@ -1,5 +1,5 @@
 import { SidebarNav } from "@/components/sidebar-nav";
-import { ProductCard } from "@/components/product-card";
+import ProductCard from "@/components/product-card";
 import { Button } from "@/components/ui/button";
 import { auth } from "@/auth";
 import {
@@ -8,18 +8,9 @@ import {
   exampleProducts,
 } from "@/utils/dummy";
 import slugify from "slugify";
+import { ClassifiedAd } from "@/lib/types";
 
-interface Product {
-  id: string;
-  title: string;
-  price: number;
-  city: string;
-  negotiable?: boolean;
-  imageUrl: string;
-  isFavorited: boolean;
-}
-
-async function fetchProducts(): Promise<Product[]> {
+async function fetchProducts(): Promise<ClassifiedAd[]> {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/classifiedads`,

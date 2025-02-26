@@ -13,19 +13,9 @@ import {
 import { toggleFavorite } from "@/app/actions/favorite";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { ClassifiedAd } from "@/lib/types";
 
-interface ProductCardProps {
-  id: string;
-  title: string;
-  price: number;
-  city: string;
-  imageUrl?: string;
-  negotiable?: boolean;
-  isFavorited: boolean;
-  link: string;
-}
-
-export function ProductCard({
+export default function ProductCard({
   id,
   title,
   price,
@@ -34,7 +24,7 @@ export function ProductCard({
   negotiable = false,
   isFavorited,
   link,
-}: ProductCardProps) {
+}: ClassifiedAd) {
   const [favorited, setFavorited] = useState(isFavorited);
   const [isPending, startTransition] = useTransition();
 

@@ -37,6 +37,7 @@ export const featuredProducts = [
     description: "Ein schönes Einfamilienhaus mit Garten und Garage.",
     name: "Max Mustermann",
     isFavorited: false,
+    createdAt: new Date(),
   },
   {
     id: "rote-huette-002",
@@ -49,6 +50,7 @@ export const featuredProducts = [
     description: "Kleine gemütliche Hütte direkt am Strand von Sylt.",
     name: "Anna Schmidt",
     isFavorited: false,
+    createdAt: new Date(),
   },
   {
     id: "villa-martin-003",
@@ -61,6 +63,7 @@ export const featuredProducts = [
     description: "Luxuriöse Villa mit großem Garten und Pool.",
     name: "Johannes Becker",
     isFavorited: false,
+    createdAt: new Date(),
   },
   {
     id: "classic-haeuschen-004",
@@ -73,6 +76,7 @@ export const featuredProducts = [
     description: "Klassisches Häuschen mit moderner Ausstattung.",
     name: "Sophie Müller",
     isFavorited: false,
+    createdAt: new Date(),
   },
 ];
 
@@ -88,6 +92,7 @@ export const exampleProducts = [
     description: "Bequeme grüne Couch, kaum benutzt.",
     name: "Peter Wagner",
     isFavorited: false,
+    createdAt: new Date(),
   },
   {
     id: "vintage-fahrrad-006",
@@ -100,6 +105,7 @@ export const exampleProducts = [
     description: "Gut erhaltenes Vintage Fahrrad aus den 80ern.",
     name: "Lena Fischer",
     isFavorited: false,
+    createdAt: new Date(),
   },
   {
     id: "zimmerpflanze-007",
@@ -112,6 +118,7 @@ export const exampleProducts = [
     description: "Schöne pflegeleichte Zimmerpflanze.",
     name: "Nina Berger",
     isFavorited: false,
+    createdAt: new Date(),
   },
   {
     id: "skateboard-008",
@@ -124,5 +131,6 @@ export const exampleProducts = [
     description: "Robustes Skateboard, ideal für Anfänger.",
     name: "Tom Krause",
     isFavorited: false,
+    createdAt: new Date(),
   },
 ];
