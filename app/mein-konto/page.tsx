@@ -1,0 +1,47 @@
+import { auth } from "@/auth";
+import { prisma } from "@/lib/prisma";
+import PreviewCardList from "@/components/preview-card-list";
+import { ClassifiedAd } from "@/lib/types";
+
+async function fetchUserAds(): Promise<ClassifiedAd[]> {
+  try {
+    const session = await auth();
+
+    if (!session?.user?.id) {
+      return [];
+    }
+
+    const ads = await prisma.classifiedAd.findMany({
+      where: {
+        userId: session.user.id,
+      },
+      select: {
+        id: true,
+        title: true,
+        price: true,
+        city: true,
+        description: true,
+        createdAt: true,
+      },
+      orderBy: { createdAt: "desc" },
+    });
+
+    return ads as ClassifiedAd[];
+  } catch (error) {
+    console.error("Error fetching user ads:", error);
+    return [];
+  }
+}
+
+export default async function MyAds() {
+  const userAds = await fetchUserAds();
+
+  return (
+    <main className="min-h-screen bg-gray-100 py-8">
+      <div className="container mx-auto px-4">
+        <h1 className="text-2xl font-bold mb-6">Meine Inserate</h1>
+        <PreviewCardList ads={userAds} />
+      </div>
+    </main>
+  );
+}
