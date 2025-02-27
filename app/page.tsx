@@ -8,6 +8,8 @@ import {
 import slugify from "slugify";
 import { ClassifiedAd } from "@/lib/types";
 
+export const dynamic = "force-dynamic";
+
 async function fetchProducts(): Promise<ClassifiedAd[]> {
   try {
     const res = await fetch(

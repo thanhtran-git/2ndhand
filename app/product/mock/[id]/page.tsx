@@ -7,9 +7,7 @@ import { User, Mail, MapPin, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { featuredProducts, exampleProducts } from "@/utils/dummy";
 
-interface ProductPageProps {
-  params: { id: string };
-}
+type Params = Promise<{ id: string; title: string }>;
 
 const getProduct = (id: string) => {
   return (
@@ -18,8 +16,9 @@ const getProduct = (id: string) => {
   );
 };
 
-export default function ProductPage({ params }: ProductPageProps) {
-  const product = getProduct(params.id);
+export default async function ProductPage({ params }: { params: Params }) {
+  const { id } = await params;
+  const product = getProduct(id);
   if (!product) return notFound();
 
   return (

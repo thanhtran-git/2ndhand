@@ -8,10 +8,6 @@ import { User, Mail, MapPin, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import slugify from "slugify";
 
-// interface paramsType {
-//   params: Promise<{ id: string; title: string }>;
-// }
-
 type Params = Promise<{ id: string; title: string }>;
 
 const prisma = new PrismaClient();
