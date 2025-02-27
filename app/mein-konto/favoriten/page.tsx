@@ -27,6 +27,7 @@ async function fetchUserFavorites(): Promise<ClassifiedAd[]> {
         city: true,
         description: true,
         createdAt: true,
+        imageUrl: true,
       },
       orderBy: { createdAt: "desc" },
     });

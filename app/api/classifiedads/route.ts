@@ -36,6 +36,7 @@ export async function GET() {
         title: true,
         price: true,
         city: true,
+        imageUrl: true,
         favorites: {
           where: {
             userId: session?.user?.id,

@@ -14,7 +14,7 @@ export default function PreviewCard({
 }: ClassifiedAd) {
   return (
     <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
-      <div className="flex flex-col sm:flex-row">
+      <div className="flex flex-col sm:flex-row items-center p-4">
         <div className="relative w-full sm:w-[240px] h-[180px]">
           <Image
             src={imageUrl || "/placeholder.svg"}

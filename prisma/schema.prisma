@@ -13,6 +13,7 @@ model ClassifiedAd {
   type        String
   title       String
   category    String
+  imageUrl    String
   price       Float
   priceType   String
   description String

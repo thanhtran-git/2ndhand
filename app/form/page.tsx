@@ -38,6 +38,7 @@ const formSchema = z.object({
   category: z.string({
     required_error: "Bitte wählen Sie eine Kategorie.",
   }),
+  imageUrl: z.string(),
   price: z.coerce.number(),
   priceType: z.string(),
   description: z.string(),
@@ -62,6 +63,7 @@ export default function ClassifiedForm() {
       type: "offer",
       title: "",
       category: "",
+      imageUrl: "",
       price: 1,
       priceType: "",
       description: "",
@@ -260,21 +262,22 @@ export default function ClassifiedForm() {
                     </FormItem>
                   )}
                 />
-
-                {/* <div className="space-y-2">
-                  <FormLabel>Bilder</FormLabel>
-                  <div className="border-2 border-dashed rounded-lg p-6 text-center">
-                    <ImagePlus className="mx-auto h-12 w-12 text-gray-400" />
-                    <div className="mt-4">
-                      <Button type="button" variant="outline">
-                        Bilder hinzufügen
-                      </Button>
-                    </div>
-                  </div>
-                  <FormDescription>
-                    Tipp: Lade bis zu 20 Bilder mit einer maximalen Größe von 5 MB hoch.
-                  </FormDescription>
-                </div> */}
+                <FormField
+                  control={form.control}
+                  name="imageUrl"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Bild-URL</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Füge die URL eines gehosteten Bildes ein"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
                 <div className="space-y-4">
                   <h3 className="text-lg font-medium">Ort</h3>

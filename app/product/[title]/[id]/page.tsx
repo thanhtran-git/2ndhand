@@ -30,6 +30,7 @@ async function getProduct(id: string) {
       type: true,
       category: true,
       createdAt: true,
+      imageUrl: true,
     },
   });
 }
@@ -52,7 +53,7 @@ export default async function ProductPage({ params }: { params: Params }) {
           <div className="space-y-4">
             <div className="relative aspect-square bg-white rounded-xl overflow-hidden">
               <Image
-                src={"/placeholder.svg"}
+                src={product.imageUrl || "/placeholder-image.jpg"}
                 alt={product.title}
                 fill
                 className="object-contain p-4"
