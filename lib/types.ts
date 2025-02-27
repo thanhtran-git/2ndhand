@@ -9,4 +9,5 @@ export interface ClassifiedAd {
   description: string;
   link: string;
   createdAt: Date;
+  favorites: Array<{ id: string; userId: string }>;
 }

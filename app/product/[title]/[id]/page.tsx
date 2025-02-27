@@ -8,11 +8,13 @@ import { User, Mail, MapPin, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import slugify from "slugify";
 
-const prisma = new PrismaClient();
+// interface paramsType {
+//   params: Promise<{ id: string; title: string }>;
+// }
 
-interface ProductPageProps {
-  params: { id: string; title: string };
-}
+type Params = Promise<{ id: string; title: string }>;
+
+const prisma = new PrismaClient();
 
 async function getProduct(id: string) {
   return await prisma.classifiedAd.findUnique({
@@ -32,14 +34,14 @@ async function getProduct(id: string) {
   });
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
-  console.log("Received Params:", params);
-  const product = await getProduct(params.id);
+export default async function ProductPage({ params }: { params: Params }) {
+  const { id, title } = await params;
+  const product = await getProduct(id);
   if (!product) return notFound();
 
   const correctSlug = slugify(product.title, { lower: true, strict: true });
 
-  if (params.title !== correctSlug) {
+  if (title !== correctSlug) {
     return notFound();
   }
 
