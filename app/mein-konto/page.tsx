@@ -4,6 +4,8 @@ import PreviewCardList from "@/components/preview-card-list";
 import { ClassifiedAd } from "@/lib/types";
 import Link from "next/link";
 
+export const dynamic = 'force-dynamic';
+
 async function fetchUserAds(): Promise<ClassifiedAd[]> {
   try {
     const session = await auth();
