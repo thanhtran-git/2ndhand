@@ -10,10 +10,6 @@ import slugify from "slugify";
 
 const prisma = new PrismaClient();
 
-interface ProductPageProps {
-  params: { id: string; title: string };
-}
-
 async function getProduct(id: string) {
   return await prisma.classifiedAd.findUnique({
     where: { id },
@@ -32,14 +28,14 @@ async function getProduct(id: string) {
   });
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
-  console.log("Received Params:", params);
-  const product = await getProduct(params.id);
+export default async function ProductPage({params}: {params: Promise<{ id: string, title: string}>});
+  const {id, title} = await params; 
+  const product = await getProduct(id);
   if (!product) return notFound();
 
   const correctSlug = slugify(product.title, { lower: true, strict: true });
 
-  if (params.title !== correctSlug) {
+  if (title !== correctSlug) {
     return notFound();
   }
 
