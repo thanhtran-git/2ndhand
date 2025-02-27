@@ -43,32 +43,33 @@ export default function ProductCard({
 
   return (
     <Card className="overflow-hidden">
-      <CardHeader className="p-0">
-        <div className="relative aspect-square">
-          <Image
-            src={imageUrl || "/placeholder-image.jpg"}
-            alt={title}
-            fill
-            className="object-cover"
-          />
-          {session?.user?.id && (
-            <Button
-              size="icon"
-              variant="ghost"
-              className="absolute right-2 top-2 h-8 w-8 rounded-full bg-white/80"
-              onClick={handleFavorite}
-              disabled={isPending}
-            >
-              <Heart
-                className={`h-4 w-4 ${
-                  favorited ? "text-red-500" : "text-gray-500"
-                }`}
-              />
-            </Button>
-          )}
-        </div>
-      </CardHeader>
       <Link href={link}>
+        <CardHeader className="p-0">
+          <div className="relative sm:h-[160px]">
+            <Image
+              src={imageUrl || "/placeholder-image.jpg"}
+              alt={title}
+              fill
+              className="object-cover  transition-transform duration-300 ease-in-out hover:scale-110"
+            />
+            {session?.user?.id && (
+              <Button
+                size="icon"
+                variant="ghost"
+                className="absolute right-2 top-2 h-8 w-8 rounded-full bg-white/80"
+                onClick={handleFavorite}
+                disabled={isPending}
+              >
+                <Heart
+                  className={`h-4 w-4 ${
+                    favorited ? "text-red-500, fill-red-300" : "text-gray-500"
+                  }`}
+                />
+              </Button>
+            )}
+          </div>
+        </CardHeader>
+
         <CardContent className="p-3">
           {title}
           <div className="mt-1 text-lg font-bold">

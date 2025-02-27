@@ -33,7 +33,7 @@ export default async function Home() {
   const products = await fetchProducts();
 
   return (
-    <div className="min-h-screen bg-gray-50 mx-auto">
+    <div className="min-h-screen bg-gray-50 max-w-7xl mx-auto">
       <div className="container mx-auto grid grid-cols-1 gap-6 py-8 md:grid-cols-[240px_1fr]">
         <aside className="hidden md:block">
           <SidebarNav items={sidebarNavItems} className="sticky top-24" />
