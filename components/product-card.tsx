@@ -52,37 +52,35 @@ export default function ProductCard({
               fill
               className="object-cover  transition-transform duration-300 ease-in-out hover:scale-110"
             />
-            {session?.user?.id && (
-              <Button
-                size="icon"
-                variant="ghost"
-                className="absolute right-2 top-2 h-8 w-8 rounded-full bg-white/80"
-                onClick={handleFavorite}
-                disabled={isPending}
-              >
-                <Heart
-                  className={`h-4 w-4 ${
-                    favorited ? "text-red-500, fill-red-300" : "text-gray-500"
-                  }`}
-                />
-              </Button>
-            )}
+            <div className="absolute bottom-1 right-1 bg-[#ace223] text-black px-2 py-1 text-sm font-bold rounded">
+              {price.toLocaleString("de-DE", {
+                style: "currency",
+                currency: "EUR",
+              })}
+              {negotiable && " VB"}
+            </div>
           </div>
         </CardHeader>
 
-        <CardContent className="p-3">
-          {title}
-          <div className="mt-1 text-lg font-bold">
-            {price.toLocaleString("de-DE", {
-              style: "currency",
-              currency: "EUR",
-            })}
-            {negotiable && " VB"}
-          </div>
-        </CardContent>
+        <CardContent className="p-3">{title}</CardContent>
       </Link>
-      <CardFooter className="p-3 pt-0 text-sm text-muted-foreground">
+      <CardFooter className="relative p-3 pt-0 text-sm text-muted-foreground">
         {city}
+        {session?.user?.id && (
+          <Button
+            size="icon"
+            variant="outline"
+            className="absolute right-2 bottom-2 h-8 w-8 rounded-full bg-white/80"
+            onClick={handleFavorite}
+            disabled={isPending}
+          >
+            <Heart
+              className={`h-4 w-4 ${
+                favorited ? "text-red-500 fill-red-300" : "text-gray-500"
+              }`}
+            />
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );

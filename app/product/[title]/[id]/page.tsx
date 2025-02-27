@@ -19,6 +19,7 @@ async function getProduct(id: string) {
       id: true,
       title: true,
       price: true,
+      priceType: true,
       description: true,
       postalCode: true,
       city: true,
@@ -71,12 +72,14 @@ export default async function ProductPage({ params }: { params: Params }) {
                   {product.type === "offer" ? "Angebot" : "Gesuch"}
                 </Badge>
               </div>
-              <p className="text-3xl font-bold text-primary">
-                {product.price.toLocaleString("de-DE", {
-                  style: "currency",
-                  currency: "EUR",
-                })}
-              </p>
+              <div className="text-2xl font-bold text-primary">
+                <span className="bg-[#ace223] py-1 px-3 text-black rounded">
+                  {product.price.toLocaleString("de-DE", {
+                    style: "currency",
+                    currency: "EUR",
+                  })}
+                </span>
+              </div>
             </div>
 
             <Card>

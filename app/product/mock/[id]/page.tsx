@@ -50,12 +50,14 @@ export default async function ProductPage({ params }: { params: Params }) {
                   {product.negotiable ? "Verhandelbar" : "Festpreis"}
                 </Badge>
               </div>
-              <p className="text-3xl font-bold text-primary">
-                {product.price.toLocaleString("de-DE", {
-                  style: "currency",
-                  currency: "EUR",
-                })}
-              </p>
+              <div className="text-2xl font-bold text-primary">
+                <span className="bg-[#ace223] py-1 px-3 text-black rounded">
+                  {product.price.toLocaleString("de-DE", {
+                    style: "currency",
+                    currency: "EUR",
+                  })}
+                </span>
+              </div>
             </div>
 
             <Card>
