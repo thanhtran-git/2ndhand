@@ -38,6 +38,7 @@ export const featuredProducts = [
     name: "Max Mustermann",
     isFavorited: false,
     createdAt: new Date(),
+    favorites: [],
   },
   {
     id: "rote-huette-002",
@@ -51,6 +52,7 @@ export const featuredProducts = [
     name: "Anna Schmidt",
     isFavorited: false,
     createdAt: new Date(),
+    favorites: [],
   },
   {
     id: "villa-martin-003",
@@ -64,6 +66,7 @@ export const featuredProducts = [
     name: "Johannes Becker",
     isFavorited: false,
     createdAt: new Date(),
+    favorites: [],
   },
   {
     id: "classic-haeuschen-004",
@@ -77,6 +80,7 @@ export const featuredProducts = [
     name: "Sophie Müller",
     isFavorited: false,
     createdAt: new Date(),
+    favorites: [],
   },
 ];
 
@@ -93,6 +97,7 @@ export const exampleProducts = [
     name: "Peter Wagner",
     isFavorited: false,
     createdAt: new Date(),
+    favorites: [],
   },
   {
     id: "vintage-fahrrad-006",
@@ -106,6 +111,7 @@ export const exampleProducts = [
     name: "Lena Fischer",
     isFavorited: false,
     createdAt: new Date(),
+    favorites: [],
   },
   {
     id: "zimmerpflanze-007",
@@ -119,6 +125,7 @@ export const exampleProducts = [
     name: "Nina Berger",
     isFavorited: false,
     createdAt: new Date(),
+    favorites: [],
   },
   {
     id: "skateboard-008",
@@ -132,5 +139,6 @@ export const exampleProducts = [
     name: "Tom Krause",
     isFavorited: false,
     createdAt: new Date(),
+    favorites: [],
   },
 ];
