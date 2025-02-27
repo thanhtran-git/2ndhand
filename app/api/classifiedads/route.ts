@@ -50,16 +50,12 @@ export async function GET() {
       orderBy: { createdAt: "desc" },
     });
 
-    const mappedAds = ads.map((ad) => ({
-      ...ad,
-      isFavorited: ad.favorites.some(
-        (favorite) =>
-          (favorite as { id: string; userId: string }).userId ===
-          session?.user?.id
-      ),
-    }));
-
-    return NextResponse.json({ ads: mappedAds });
+    return NextResponse.json({
+      ads: ads.map((ad) => ({
+        ...ad,
+        isFavorited: ad.favorites.length > 0,
+      })),
+    });
   } catch (error) {
     console.error("Database fetch error:", error);
     return NextResponse.json({ error: "Failed to load ads" }, { status: 500 });
