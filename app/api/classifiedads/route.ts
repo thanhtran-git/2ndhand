@@ -9,7 +9,6 @@ export async function GET(req: Request) {
     const query = searchParams.get("query");
 
     if (query) {
-      // Handle search request
       const ads = await prisma.classifiedAd.findMany({
         where: {
           title: { contains: query, mode: "insensitive" },
@@ -19,8 +18,6 @@ export async function GET(req: Request) {
 
       return NextResponse.json(ads);
     }
-
-    // Default: Fetch all ads
     const ads = await prisma.classifiedAd.findMany({
       select: {
         id: true,
