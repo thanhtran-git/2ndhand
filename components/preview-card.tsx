@@ -44,7 +44,12 @@ export default function PreviewCard({
             <h2 className="text-xl font-bold mb-2">{title}</h2>
           </Link>
 
-          <p className="text-gray-700 mb-3">{description}</p>
+          <p className="text-gray-700 mb-3">
+            {" "}
+            {description.length > 100
+              ? description.slice(0, 150) + "..."
+              : description}
+          </p>
 
           <div className="text-lg font-bold text-green-700 mb-2">
             {price.toLocaleString("de-DE", {
