@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import PreviewCardList from "@/components/PreviewCard-List";
 import { ClassifiedAd } from "@/lib/types";
 
-type searchParamsType = { query?: string };
+type searchParamsType = Promise<{ query?: string }>;
 
 async function fetchAds(query: string): Promise<ClassifiedAd[] | null> {
   try {
