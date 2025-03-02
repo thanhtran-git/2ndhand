@@ -1,4 +1,4 @@
-import PreviewCard from "@/components/Preview-Card";
+import PreviewCard from "@/components/PreviewCard";
 import slugify from "slugify";
 import { ClassifiedAd } from "@/lib/types";
 

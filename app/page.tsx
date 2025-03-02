@@ -1,5 +1,5 @@
-import SidebarNav from "@/components/Sidebar-Nav";
-import ProductCard from "@/components/Product-Card";
+import SidebarNav from "@/components/SidebarNav";
+import ProductCard from "@/components/ProductCard";
 import {
   sidebarNavItems,
   featuredProducts,
