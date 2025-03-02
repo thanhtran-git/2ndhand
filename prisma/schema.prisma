@@ -9,43 +9,39 @@ datasource db {
 }
 
 model ClassifiedAd {
-  id          String   @id @default(cuid())
+  id          String     @id @default(cuid())
   type        String
   title       String
   category    String
-  imageUrl    String
   price       Float
   priceType   String
   description String
   postalCode  String
   city        String
-  street      String?
   name        String
-  createdAt   DateTime @default(now())
+  createdAt   DateTime   @default(now())
   userId      String
-
-  user      User       @relation(fields: [userId], references: [id])
-  favorites Favorite[]
+  imageUrl    String?
+  user        User       @relation(fields: [userId], references: [id])
+  favorites   Favorite[]
 }
 
 model User {
-  id        String   @id @default(cuid())
+  id        String         @id @default(cuid())
   name      String
-  email     String   @unique
-  createdAt DateTime @default(now())
-
+  email     String         @unique
+  createdAt DateTime       @default(now())
   ads       ClassifiedAd[]
   favorites Favorite[]
 }
 
 model Favorite {
-  id        String   @id @default(cuid())
+  id        String       @id @default(cuid())
   userId    String
   adId      String
-  createdAt DateTime @default(now())
-
-  user User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  ad   ClassifiedAd @relation(fields: [adId], references: [id], onDelete: Cascade)
+  createdAt DateTime     @default(now())
+  ad        ClassifiedAd @relation(fields: [adId], references: [id], onDelete: Cascade)
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, adId])
 }

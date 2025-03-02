@@ -4,7 +4,7 @@ export interface ClassifiedAd {
   price: number;
   city: string;
   negotiable?: boolean;
-  imageUrl: string;
+  imageUrl: string | null;
   isFavorited: boolean;
   description: string;
   link: string;
