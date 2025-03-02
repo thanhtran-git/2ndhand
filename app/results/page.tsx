@@ -2,24 +2,31 @@ import { notFound } from "next/navigation";
 import PreviewCardList from "@/components/PreviewCard-List";
 import { ClassifiedAd } from "@/lib/types";
 
-async function fetchAds(query: string) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/classifiedads?query=${query}`
-  );
+type searchParamsType = { query?: string };
 
-  if (!res.ok) {
+async function fetchAds(query: string): Promise<ClassifiedAd[] | null> {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/classifiedads?query=${query}`
+    );
+
+    if (!res.ok) {
+      return null;
+    }
+
+    return res.json();
+  } catch (error) {
+    console.error("Error fetching ads:", error);
     return null;
   }
-
-  return res.json();
 }
 
 export default async function ResultsPage({
   searchParams,
 }: {
-  searchParams: { query?: string };
+  searchParams: searchParamsType;
 }) {
-  const query = searchParams.query || "";
+  const query = (await searchParams).query ?? "";
 
   if (!query.trim()) {
     return notFound();
