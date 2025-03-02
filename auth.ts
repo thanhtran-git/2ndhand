@@ -4,6 +4,9 @@ import { prisma } from "@/lib/prisma";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [GitHub],
+  session: {
+    maxAge: 60 * 60,
+  },
   callbacks: {
     async signIn({ user }) {
       if (!user.email) return false;
@@ -29,7 +32,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
 
     async session({ session }) {
-      if (!session?.user?.email) return session;
+      if (!session.user.email) return session;
 
       try {
         const dbUser = await prisma.user.findUnique({
