@@ -2,10 +2,25 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
     const session = await auth();
+    const { searchParams } = new URL(req.url);
+    const query = searchParams.get("query");
 
+    if (query) {
+      // Handle search request
+      const ads = await prisma.classifiedAd.findMany({
+        where: {
+          title: { contains: query, mode: "insensitive" },
+        },
+        take: 10,
+      });
+
+      return NextResponse.json(ads);
+    }
+
+    // Default: Fetch all ads
     const ads = await prisma.classifiedAd.findMany({
       select: {
         id: true,
