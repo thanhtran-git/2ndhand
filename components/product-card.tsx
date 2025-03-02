@@ -27,6 +27,7 @@ export default function ProductCard({
 }: ClassifiedAd) {
   const [favorited, setFavorited] = useState(isFavorited);
   const [isPending, startTransition] = useTransition();
+  const [imageError, setImageError] = useState(false);
 
   const { data: session } = useSession();
 
@@ -41,16 +42,23 @@ export default function ProductCard({
     });
   };
 
+  const handleImageError = () => {
+    setImageError(true);
+  };
+
   return (
     <Card className="overflow-hidden">
       <Link href={link}>
         <CardHeader className="p-0">
           <div className="relative sm:h-[160px]">
             <Image
-              src={imageUrl || "/placeholder-image.jpg"}
+              src={
+                imageError || !imageUrl ? "/placeholder-image.jpg" : imageUrl
+              }
               alt={title}
               fill
               className="object-cover  transition-transform duration-300 ease-in-out hover:scale-110"
+              onError={handleImageError}
             />
             <div className="absolute bottom-1 right-1 bg-[#ace223] text-black px-2 py-1 text-sm font-bold rounded">
               {price.toLocaleString("de-DE", {
