@@ -3,7 +3,7 @@ import { auth } from "@/auth";
 import { SignInButton } from "@/components/auth/signin-button";
 import { SignOutButton } from "@/components/auth/signout-button";
 
-export async function Profile() {
+export default async function Profile() {
   const session = await auth();
 
   return (

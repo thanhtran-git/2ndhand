@@ -1,18 +1,28 @@
-import Link from "next/link"
-import { cn } from "@/lib/utils"
-import type React from "react"
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import type React from "react";
 
 interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
   items: {
-    href: string
-    title: string
-    items?: { href: string; title: string }[]
-  }[]
+    href: string;
+    title: string;
+    items?: { href: string; title: string }[];
+  }[];
 }
 
-export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
+export default function SidebarNav({
+  className,
+  items,
+  ...props
+}: SidebarNavProps) {
   return (
-    <nav className={cn("flex space-x-2 lg:flex-col lg:space-x-0 lg:space-y-1", className)} {...props}>
+    <nav
+      className={cn(
+        "flex space-x-2 lg:flex-col lg:space-x-0 lg:space-y-1",
+        className
+      )}
+      {...props}
+    >
       {items.map((item) => (
         <div key={item.href} className="space-y-1">
           <Link
@@ -33,5 +43,5 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
         </div>
       ))}
     </nav>
-  )
+  );
 }

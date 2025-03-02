@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
-import PreviewCardList from "@/components/preview-card-list";
+import PreviewCardList from "@/components/Preview-Card-List";
 import { ClassifiedAd } from "@/lib/types";
 import Link from "next/link";
 

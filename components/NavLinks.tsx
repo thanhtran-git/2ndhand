@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Tag, UserRound } from "lucide-react";
 import { auth } from "@/auth";
 
-export async function NavLinks() {
+export default async function NavLinks() {
   const session = await auth();
 
   if (!session) return null;

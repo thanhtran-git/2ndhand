@@ -18,10 +18,9 @@ export default function ImageUrlField() {
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setShowImageUrlInput(event.target.checked);
 
-    // Optionally, reset the imageUrl value when the checkbox is unchecked
     if (!event.target.checked) {
-      setValue("imageUrl", undefined); // Reset imageUrl in the form context
-      clearErrors("imageUrl"); // Optionally clear any validation errors for imageUrl
+      setValue("imageUrl", undefined);
+      clearErrors("imageUrl");
     }
   };
 

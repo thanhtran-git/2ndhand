@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { SearchInput } from "@/components/search-input";
-import { ZipCodeInput } from "@/components/zipcode-input";
-import { Profile } from "@/components/profile";
-import { NavLinks } from "@/components/nav-links";
+import SearchInput from "@/components/SearchField";
+import ZipCodeInput from "@/components/ZipcodeField";
+import Profile from "@/components/Profile";
+import NavLinks from "@/components/NavLinks";
 import Image from "next/image";
+
 export default async function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-[#86B817] pb-2 pt-2">

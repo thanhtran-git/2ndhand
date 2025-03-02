@@ -1,7 +1,7 @@
 import { MapPin } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
-export function ZipCodeInput() {
+export default function ZipCodeInput() {
   return (
     <div className="flex items-center gap-2 rounded-full bg-white p-2">
       <MapPin className="h-4 w-4 text-gray-500" />

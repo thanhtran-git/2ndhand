@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { MapPin, Clock } from "lucide-react";
 import Link from "next/link";
 import { ClassifiedAd } from "@/lib/types";
+import ProductImage from "@/components/ProductImage";
 
 export default function PreviewCard({
   title,
@@ -16,12 +16,7 @@ export default function PreviewCard({
     <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
       <div className="flex flex-col sm:flex-row items-center p-4">
         <div className="relative w-full sm:w-[240px] h-[180px]">
-          <Image
-            src={imageUrl || "/placeholder.svg"}
-            alt={title}
-            fill
-            className="object-cover"
-          />
+          <ProductImage src={imageUrl} alt={title} />
         </div>
         <div className="flex-1 p-4">
           <div className="flex justify-between items-start mb-2">

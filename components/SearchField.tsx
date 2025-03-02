@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export function SearchInput() {
+export default function SearchInput() {
   return (
     <div className="flex flex-1 items-center gap-2 rounded-full bg-white p-2">
       <Search className="h-4 w-4 text-gray-500" />
