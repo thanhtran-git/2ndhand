@@ -24,6 +24,7 @@ async function fetchUserAds(): Promise<ClassifiedAd[]> {
         price: true,
         city: true,
         description: true,
+        postalCode: true,
         createdAt: true,
         imageUrl: true,
       },
@@ -38,15 +39,30 @@ async function fetchUserAds(): Promise<ClassifiedAd[]> {
 }
 
 export default async function MyAds() {
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  if (!userId) {
+    return (
+      <main className="min-h-screen bg-gray-100 py-8">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-2xl font-bold text-[#86B817] underline underline-offset-4">
+            Meine Inserate
+          </h1>
+          <p className="mt-4">
+            Bitte melde dich an, um deine Inserate zu sehen.
+          </p>
+        </div>
+      </main>
+    );
+  }
+
   const userAds = await fetchUserAds();
 
   return (
     <main className="min-h-screen bg-gray-100 py-8">
       <div className="container mx-auto px-4">
-        <div
-          className="flex mb-6 justify-center
-         gap-10"
-        >
+        <div className="flex mb-6 justify-center gap-10">
           <h1 className="text-2xl font-bold text-[#86B817] underline underline-offset-4">
             Meine Inserate
           </h1>

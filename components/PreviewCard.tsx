@@ -11,6 +11,7 @@ export default function PreviewCard({
   description,
   link,
   createdAt,
+  postalCode,
 }: ClassifiedAd) {
   return (
     <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
@@ -22,7 +23,9 @@ export default function PreviewCard({
           <div className="flex justify-between items-start mb-2">
             <div className="flex items-center text-gray-500 text-sm">
               <MapPin className="h-4 w-4 mr-1" />
-              <span>{city}</span>
+              <span>
+                {postalCode} {city}
+              </span>
             </div>
             <div className="flex items-center text-gray-500 text-sm">
               <Clock className="h-4 w-4 mr-1" />

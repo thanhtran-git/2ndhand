@@ -3,6 +3,7 @@ export interface ClassifiedAd {
   title: string;
   price: number;
   city: string;
+  postalCode: string;
   negotiable?: boolean;
   imageUrl: string | null;
   isFavorited: boolean;

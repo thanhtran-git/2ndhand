@@ -32,6 +32,7 @@ export default function ClassifiedForm() {
       title: "",
       category: "",
       price: 1,
+      imageUrl: "",
       priceType: "",
       description: "",
       postalCode: "",
