@@ -1,9 +1,15 @@
+"use client";
+
 import { MapPin, Clock } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ClassifiedAd } from "@/lib/types";
 import ProductImage from "@/components/ProductImage";
+import DeleteButton from "@/components/DeleteButton";
+import deleteProduct from "@/app/actions/deleteProduct";
 
 export default function PreviewCard({
+  id,
   title,
   price,
   city,
@@ -12,9 +18,22 @@ export default function PreviewCard({
   link,
   createdAt,
   postalCode,
-}: ClassifiedAd) {
+  isFavorite = false,
+  showDeleteButton = false,
+}: ClassifiedAd & { showDeleteButton?: boolean; isFavorite?: boolean }) {
+  const router = useRouter();
+
+  const handleDelete = async () => {
+    const response = await deleteProduct(id, isFavorite);
+    if (response?.success) {
+      router.refresh();
+    } else {
+      alert(response?.error || "Fehler beim Löschen.");
+    }
+  };
+
   return (
-    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
+    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm relative">
       <div className="flex flex-col sm:flex-row items-center p-4">
         <div className="relative w-full sm:w-[240px] h-[180px]">
           <ProductImage src={imageUrl} alt={title} />
@@ -43,7 +62,6 @@ export default function PreviewCard({
           </Link>
 
           <p className="text-gray-700 mb-3">
-            {" "}
             {description.length > 100
               ? description.slice(0, 150) + "..."
               : description}
@@ -57,6 +75,8 @@ export default function PreviewCard({
           </div>
         </div>
       </div>
+
+      {showDeleteButton && <DeleteButton onDelete={handleDelete} />}
     </div>
   );
 }

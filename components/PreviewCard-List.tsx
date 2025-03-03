@@ -4,9 +4,13 @@ import { ClassifiedAd } from "@/lib/types";
 
 interface PreviewCardListProps {
   ads: ClassifiedAd[];
+  showDeleteButton?: boolean;
 }
 
-export default function PreviewCardList({ ads }: PreviewCardListProps) {
+export default function PreviewCardList({
+  ads,
+  showDeleteButton,
+}: PreviewCardListProps) {
   if (ads.length === 0) {
     return <p className="text-gray-500">Keine Inserate vorhanden</p>;
   }
@@ -21,6 +25,7 @@ export default function PreviewCardList({ ads }: PreviewCardListProps) {
               lower: true,
               strict: true,
             })}/${ad.id}`}
+            showDeleteButton={showDeleteButton}
           />
         </div>
       ))}
