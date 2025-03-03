@@ -3,7 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
 
-export default async function deleteProduct(id: string, isFavorite: boolean) {
+export default async function deleteProduct(id: string) {
   const session = await auth();
 
   if (!session || !session.user) {
@@ -14,16 +14,9 @@ export default async function deleteProduct(id: string, isFavorite: boolean) {
   }
 
   try {
-    if (isFavorite) {
-      await prisma.favorite.delete({
-        where: { id },
-      });
-    } else {
-      await prisma.classifiedAd.delete({
-        where: { id },
-      });
-    }
-
+    await prisma.classifiedAd.delete({
+      where: { id },
+    });
     return { success: true };
   } catch (error) {
     console.error("Fehler beim Löschen:", error);

@@ -2,11 +2,10 @@
 
 import { MapPin, Clock } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { ClassifiedAd } from "@/lib/types";
 import ProductImage from "@/components/ProductImage";
 import DeleteButton from "@/components/DeleteButton";
-import deleteProduct from "@/app/actions/deleteProduct";
+import FavoriteButton from "@/components/FavoriteButton";
 
 export default function PreviewCard({
   id,
@@ -18,20 +17,16 @@ export default function PreviewCard({
   link,
   createdAt,
   postalCode,
-  isFavorite = false,
+  isFavorited = false,
   showDeleteButton = false,
-}: ClassifiedAd & { showDeleteButton?: boolean; isFavorite?: boolean }) {
-  const router = useRouter();
-
-  const handleDelete = async () => {
-    const response = await deleteProduct(id, isFavorite);
-    if (response?.success) {
-      router.refresh();
-    } else {
-      alert(response?.error || "Fehler beim Löschen.");
-    }
-  };
-
+  showFavoriteButton = false,
+  handleDelete,
+}: ClassifiedAd & {
+  showDeleteButton?: boolean;
+  isFavorited?: boolean;
+  showFavoriteButton?: boolean;
+  handleDelete: () => void;
+}) {
   return (
     <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm relative">
       <div className="flex flex-col sm:flex-row items-center p-4">
@@ -77,6 +72,13 @@ export default function PreviewCard({
       </div>
 
       {showDeleteButton && <DeleteButton onDelete={handleDelete} />}
+      {showFavoriteButton && (
+        <FavoriteButton
+          isFavorited={isFavorited}
+          id={id}
+          className="absolute right-4 bottom-4 rounded-full bg-white/80 hover:bg-red-400"
+        />
+      )}
     </div>
   );
 }
