@@ -38,6 +38,7 @@ export const featuredProducts = [
     name: "Max Mustermann",
     isFavorited: false,
     createdAt: new Date(),
+    postalCode: "12345",
     favorites: [],
   },
   {
@@ -52,6 +53,7 @@ export const featuredProducts = [
     name: "Anna Schmidt",
     isFavorited: false,
     createdAt: new Date(),
+    postalCode: "12345",
     favorites: [],
   },
   {
@@ -66,6 +68,7 @@ export const featuredProducts = [
     name: "Johannes Becker",
     isFavorited: false,
     createdAt: new Date(),
+    postalCode: "12345",
     favorites: [],
   },
   {
@@ -80,6 +83,7 @@ export const featuredProducts = [
     name: "Sophie Müller",
     isFavorited: false,
     createdAt: new Date(),
+    postalCode: "12345",
     favorites: [],
   },
 ];
@@ -97,6 +101,7 @@ export const exampleProducts = [
     name: "Peter Wagner",
     isFavorited: false,
     createdAt: new Date(),
+    postalCode: "12345",
     favorites: [],
   },
   {
@@ -111,6 +116,7 @@ export const exampleProducts = [
     name: "Lena Fischer",
     isFavorited: false,
     createdAt: new Date(),
+    postalCode: "12345",
     favorites: [],
   },
   {
@@ -125,6 +131,7 @@ export const exampleProducts = [
     name: "Nina Berger",
     isFavorited: false,
     createdAt: new Date(),
+    postalCode: "12345",
     favorites: [],
   },
   {
@@ -139,6 +146,7 @@ export const exampleProducts = [
     name: "Tom Krause",
     isFavorited: false,
     createdAt: new Date(),
+    postalCode: "12345",
     favorites: [],
   },
 ];
