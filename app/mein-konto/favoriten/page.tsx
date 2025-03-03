@@ -59,7 +59,7 @@ export default async function MyFavorites() {
             Favoriten
           </h1>
         </div>
-        <PreviewCardList ads={userFavorites} showDeleteButton={false} />
+        <PreviewCardList ads={userFavorites} showFavoriteButton={true} />
       </div>
     </main>
   );

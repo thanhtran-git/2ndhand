@@ -1,19 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useTransition } from "react";
-import { Heart } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { toggleFavorite } from "@/app/actions/favorite";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { ClassifiedAd } from "@/lib/types";
+import FavoriteButton from "@/components/FavoriteButton";
 
 export default function ProductCard({
   id,
@@ -25,22 +23,9 @@ export default function ProductCard({
   isFavorited,
   link,
 }: ClassifiedAd) {
-  const [favorited, setFavorited] = useState(isFavorited);
-  const [isPending, startTransition] = useTransition();
   const [imageError, setImageError] = useState(false);
 
   const { data: session } = useSession();
-
-  const handleFavorite = () => {
-    startTransition(async () => {
-      try {
-        const result = await toggleFavorite(id);
-        setFavorited(result.favorited);
-      } catch (error) {
-        console.error("Error toggling favorite:", error);
-      }
-    });
-  };
 
   const handleImageError = () => {
     setImageError(true);
@@ -75,19 +60,11 @@ export default function ProductCard({
       <CardFooter className="relative p-3 pt-0 text-sm text-muted-foreground">
         {city}
         {session?.user?.id && (
-          <Button
-            size="icon"
-            variant="outline"
-            className="absolute right-2 bottom-2 h-8 w-8 rounded-full bg-white/80"
-            onClick={handleFavorite}
-            disabled={isPending}
-          >
-            <Heart
-              className={`h-4 w-4 ${
-                favorited ? "text-red-500 fill-red-300" : "text-gray-500"
-              }`}
-            />
-          </Button>
+          <FavoriteButton
+            isFavorited={isFavorited}
+            id={id}
+            className="absolute right-2 bottom-2 rounded-full bg-white/80"
+          />
         )}
       </CardFooter>
     </Card>

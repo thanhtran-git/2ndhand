@@ -15,7 +15,7 @@ interface Session {
 export async function GET(req: Request) {
   try {
     const session = (await auth()) as Session | null;
-
+    const userId = session?.user.id;
     const { searchParams } = new URL(req.url);
     const query = searchParams.get("query");
     const postalCode = searchParams.get("postalCode");
@@ -33,7 +33,7 @@ export async function GET(req: Request) {
     return NextResponse.json({
       ads: ads.map((ad) => ({
         ...ad,
-        isFavorited: ad.favorites.length > 0,
+        isFavorited: ad.favorites.some((fav) => fav.userId === userId),
       })),
     });
   } catch (error) {
