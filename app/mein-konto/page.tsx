@@ -74,7 +74,7 @@ export default async function MyAds() {
             Favoriten
           </Link>
         </div>
-        <PreviewCardList ads={userAds} />
+        <PreviewCardList ads={userAds} showDeleteButton={true} />
       </div>
     </main>
   );
