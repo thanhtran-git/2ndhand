@@ -1,0 +1,16 @@
+export const categoryMap: Record<string, string> = {
+  Autos: "Autos",
+  Fahrrad: "Fahrräder",
+  PC: "PC",
+  Unterhaltungselektronik: "Unterhaltungselektronik",
+  Mobel: "Möbel",
+  Pflanzen: "Pflanzen",
+  Kleidung: "Kleidung & Schuhe",
+  Accessoires: "Uhren, Taschen, Schmuck",
+  Kunst: "Kunst & Antiquitäten",
+  Sammelbares: "Sammelbares",
+  Sport: "Sport & Freizeit",
+  Bucher: "Bücher",
+  Tickets: "Tickets",
+  Sonstiges: "Sonstiges",
+};

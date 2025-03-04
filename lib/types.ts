@@ -1,14 +1,15 @@
 export interface ClassifiedAd {
   id: string;
   title: string;
+  category: string;
   price: number;
   city: string;
   postalCode: string;
   negotiable?: boolean;
   imageUrl: string | null;
-  isFavorited: boolean;
+  isFavorited?: boolean;
   description: string;
-  link: string;
+  link?: string;
   createdAt: Date;
-  favorites: Array<{ id: string; userId: string }>;
+  favorites?: Array<{ id: string; userId: string }>;
 }
