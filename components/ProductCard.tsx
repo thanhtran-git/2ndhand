@@ -20,7 +20,7 @@ export default function ProductCard({
   city,
   imageUrl,
   negotiable = false,
-  isFavorited,
+  isFavorited = false,
   link,
 }: ClassifiedAd) {
   const [imageError, setImageError] = useState(false);
@@ -33,7 +33,7 @@ export default function ProductCard({
 
   return (
     <Card className="overflow-hidden">
-      <Link href={link}>
+      <Link href={link || "#"}>
         <CardHeader className="p-0">
           <div className="relative sm:h-[160px]">
             <Image

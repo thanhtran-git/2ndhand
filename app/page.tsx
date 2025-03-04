@@ -1,10 +1,7 @@
 import SidebarNav from "@/components/SidebarNav";
 import ProductCard from "@/components/ProductCard";
-import {
-  sidebarNavItems,
-  featuredProducts,
-  exampleProducts,
-} from "@/utils/dummy";
+import { featuredProducts } from "@/utils/dummy";
+import { sideBarLinks } from "@/lib/sideBarLinks";
 import slugify from "slugify";
 import { ClassifiedAd } from "@/lib/types";
 
@@ -38,7 +35,7 @@ export default async function Home() {
     <div className="min-h-screen bg-gray-50 max-w-7xl mx-auto">
       <div className="container mx-auto grid grid-cols-1 gap-6 py-8 md:grid-cols-[240px_1fr]">
         <aside className="hidden md:block">
-          <SidebarNav items={sidebarNavItems} className="sticky top-24" />
+          <SidebarNav items={sideBarLinks} className="sticky top-24" />
         </aside>
         <main className="space-y-6">
           <section>
@@ -56,22 +53,11 @@ export default async function Home() {
               ))}
             </div>
           </section>
+
           <section>
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold">Neueste Anzeigen</h2>
             </div>
-            <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {exampleProducts.map((product) => (
-                <div key={product.id}>
-                  <ProductCard
-                    {...product}
-                    link={`/product/mock/${product.id}`}
-                  />
-                </div>
-              ))}
-            </div>
-          </section>
-          <section>
             {products && (
               <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {products.map((product) => (

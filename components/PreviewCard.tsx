@@ -17,7 +17,7 @@ export default function PreviewCard({
   link,
   createdAt,
   postalCode,
-  isFavorited = false,
+  isFavorited,
   showDeleteButton = false,
   showFavoriteButton = false,
   handleDelete,
@@ -52,7 +52,7 @@ export default function PreviewCard({
               </span>
             </div>
           </div>
-          <Link href={link}>
+          <Link href={link || "#"}>
             <h2 className="text-xl font-bold mb-2">{title}</h2>
           </Link>
 
@@ -74,7 +74,7 @@ export default function PreviewCard({
       {showDeleteButton && <DeleteButton onDelete={handleDelete} />}
       {showFavoriteButton && (
         <FavoriteButton
-          isFavorited={isFavorited}
+          isFavorited={isFavorited ?? false}
           id={id}
           className="absolute right-4 bottom-4 rounded-full bg-white/80 hover:bg-red-400"
         />
