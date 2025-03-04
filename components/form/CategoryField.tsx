@@ -31,18 +31,29 @@ export default function CategoryField() {
               </SelectTrigger>
             </FormControl>
             <SelectContent>
-              <SelectItem value="bike">Fahrrädder & Zubehör</SelectItem>
-              <SelectItem value="electronics">Elektronik</SelectItem>
-              <SelectItem value="furniture">Möbel</SelectItem>
-              <SelectItem value="clothing">Kleidung & Schuhe</SelectItem>
-              <SelectItem value="art">Kunst & Antiquitäten</SelectItem>
-              <SelectItem value="sport">Sport & Freizeit</SelectItem>
-              <SelectItem value="books-music">Buch & Musik</SelectItem>
-              <SelectItem value="CD">CDs & DVDs</SelectItem>
-              <SelectItem value="photography">Bilder & Fotografie</SelectItem>
-              <SelectItem value="tickets">Tickets</SelectItem>
-              <SelectItem value="collectibles">Sammelbares</SelectItem>
-              <SelectItem value="other">Sonstiges</SelectItem>
+              <SelectContent>
+                <SelectItem value="Autos">Autos</SelectItem>
+                <SelectItem value="Fahrrad">Fahrräder & Zubehör</SelectItem>
+                <SelectItem value="Motorrad">Motorrad</SelectItem>
+                <SelectItem value="PC">PC</SelectItem>
+                <SelectItem value="Haushaltsgerate">Haushaltsgeräte</SelectItem>
+                <SelectItem value="Unterhaltungselektronik">
+                  Unterhaltungselektronik
+                </SelectItem>
+                <SelectItem value="Mobel">Möbel</SelectItem>
+                <SelectItem value="Pflanzen">Pflanzen</SelectItem>
+                <SelectItem value="Kleidung">Kleidung & Schuhe</SelectItem>
+                <SelectItem value="Accessoires">
+                  Uhren, Taschen, Schmuck
+                </SelectItem>
+                <SelectItem value="Kunst">Kunst & Antiquitäten</SelectItem>
+                <SelectItem value="Sammelbares">Sammelbares</SelectItem>
+                <SelectItem value="Bucher">Bücher</SelectItem>
+                <SelectItem value="CD">CDs & DVDs</SelectItem>
+                <SelectItem value="Tickets">Tickets</SelectItem>
+                <SelectItem value="Sammelkarten">Sammelkarten</SelectItem>
+                <SelectItem value="Sonstiges">Sonstiges</SelectItem>
+              </SelectContent>
             </SelectContent>
           </Select>
           <FormMessage />

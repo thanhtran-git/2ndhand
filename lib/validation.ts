@@ -30,7 +30,7 @@ export const formSchema = z.object({
     .min(10, {
       message: "Die Beschreibung muss mindestens 10 Zeichen lang sein.",
     })
-    .regex(/^[a-zA-Z0-9äöüÄÖÜß\s\-.,!?/()]+$/, {
+    .regex(/^[a-zA-Z0-9äöüÄÖÜß\s\-.,!?/()":]+$/, {
       message: "Nur Buchstaben, Zahlen und übliche Satzzeichen erlaubt.",
     }),
   postalCode: z
