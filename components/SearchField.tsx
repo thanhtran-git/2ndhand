@@ -21,12 +21,15 @@ export default function SearchInput() {
   };
 
   return (
-    <div className="flex flex-1 items-center gap-2 rounded-full bg-white p-2">
+    <div
+      className="flex flex-1 items-center rounded-full bg-white px-4
+    "
+    >
       <Search className="h-4 w-4 text-gray-500" />
       <Input
         type="search"
         placeholder="Was suchst du?"
-        className="border-0 focus-visible:ring-0"
+        className="!shadow-none border-0 border-none focus-visible:ring-0"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={handleSearch}

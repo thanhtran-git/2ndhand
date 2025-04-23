@@ -40,7 +40,7 @@ export default function PostalCodeField() {
         <Input
           type="search"
           placeholder="PLZ eingeben"
-          className="w-[180px] border-0 p-0 focus-visible:ring-0"
+          className="!shadow-none w-[180px] border-0 p-0 focus-visible:ring-0"
           onKeyDown={handleSearch}
           onChange={(e) => setPostalCode(e.target.value)}
           value={postalCode}

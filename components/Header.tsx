@@ -1,6 +1,6 @@
 import Link from "next/link";
 import SearchInput from "@/components/SearchField";
-import PostalCodeField from "@/components/PostalCodeField";
+import PostalCodeField from "@/components/form/PostalCodeField";
 import Profile from "@/components/Profile";
 import NavLinks from "@/components/NavLinks";
 import Image from "next/image";
@@ -21,7 +21,7 @@ export default async function Header() {
           <Profile />
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex gap-1">
           <SearchInput />
           <PostalCodeField />
           <NavLinks />

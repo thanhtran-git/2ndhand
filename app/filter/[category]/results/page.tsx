@@ -3,7 +3,7 @@ import PreviewCardList from "@/components/PreviewCard-List";
 import SidebarNav from "@/components/SidebarNav";
 import { sideBarLinks } from "@/lib/sideBarLinks";
 import { ClassifiedAd } from "@/lib/types";
-import { categoryMap } from "@/lib/categoryMap";
+// import { categoryMap } from "@/lib/categoryMap";
 
 type ParamsType = Promise<{ category: string }>;
 
@@ -52,7 +52,7 @@ export default async function CategoryResults({
 
         <main className="max-w-4xl mx-auto">
           <h1 className="text-2xl font-semibold mb-4">
-            Ergebnisse aus der Kategorie {categoryMap[category] || category}
+            Ergebnisse aus der Kategorie {category}
           </h1>
 
           {products.length > 0 ? (
